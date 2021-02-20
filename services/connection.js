@@ -19,17 +19,9 @@ const dbInstance = pgp(connection); // database instance;
 // END DEVELOPER MODE */
 
 // PRODUCTION MODE
-const connectionString = process.env.DATABASE_URL+"?ssl=true";
+const connectionString = process.env.DATABASE_URL;
 
-const dbInstance = pgp(connectionString); // database instance;
-
-const { Pool } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+const dbInstance = pgp({connectionString: connectionString, ssl: { rejectUnauthorized: false}}); // database instance;
 // END PRODUCTION MODE
 
 module.exports = dbInstance;
