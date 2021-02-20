@@ -19,7 +19,7 @@ const dbInstance = pgp(connection); // database instance;
 // END DEVELOPER MODE */
 
 // PRODUCTION MODE
-const connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL+"?ssl=true";
 
 const dbInstance = pgp(connectionString); // database instance;
 
