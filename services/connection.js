@@ -5,9 +5,8 @@ const initOptions = {
 };
 
 const pgp = require('pg-promise')(initOptions);
-var types = pgp.pg.types;
-types.setTypeParser(1114, str => str);
 
+/* //DEVELOPER MODE
 const connection = {
     host: 'localhost', // 'localhost' is the default;
     port: 5432, // 5432 is the default;
@@ -16,9 +15,21 @@ const connection = {
     password: '25428506'
 };
 
+const dbInstance = pgp(connection); // database instance;
+// END DEVELOPER MODE */
+
+// PRODUCTION MODE
 const connectionString = process.env.DATABASE_URL;
 
-const dbInstance = pgp(connection); // database instance;
-//const dbInstance = pgp(connection); // database instance;
+const dbInstance = pgp(connectionString); // database instance;
+
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+// END PRODUCTION MODE
 
 module.exports = dbInstance;
