@@ -34,3 +34,69 @@ CREATE TABLE public."VEHICLES"
     CONSTRAINT "VEHICLES_pkey" PRIMARY KEY (id)
 )
 ```
+
+## Deploy locally
+
+* Clone the repo and install dependencies
+```
+$ git clone https://github.com/cballesteros/prueba-gis-backend.git
+$ cd prueba-gis-backend
+$ npm install
+```
+
+* Run server
+
+```
+$ set DEBUG=prueba-gis-backend:* & npm start
+$
+$ prueba-gis-backend:server Listening on port 3000 +0ms
+```
+
+* Enable developer mode in services/connection.js
+
+In order to connect the database, please uncomment the section tagged as "DEVELOPER MODE" in services/connection.js file and commnet the section tagged as "PRODUCTION MODE"
+
+## Request examples:
+
+`Host: localhost:3000`
+
+```
+GET /vehicles HTTP/1.1
+```
+
+```
+GET /vehicles?id=1 HTTP/1.1
+```
+
+```
+GET /vehicles?license=FJM 620 HTTP/1.1
+```
+
+```
+POST /vehicles HTTP/1.1
+
+{
+	"license":"FJM 620",
+	"owner":"Cristian Ballesteros",
+	"brand":"KIA",
+	"latitude":"123",
+	"longitude":"456"
+}
+```
+
+```
+PUT /vehicles HTTP/1.1
+
+{
+    "id": 1
+	"license":"FJM 620",
+	"owner":"Cristian Ballesteros",
+	"brand":"KIA",
+	"latitude":"123",
+	"longitude":"456"
+}
+```
+
+```
+DELETE /vehicles?id=1 HTTP/1.1
+```

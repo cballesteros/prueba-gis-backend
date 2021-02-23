@@ -12,7 +12,7 @@ const connection = {
     port: 5432, // 5432 is the default;
     database: 'gis_db',
     user: 'postgres', // 'postgres' is the default
-    password: '25428506'
+    password: 'PASSWORD'
 };
 
 const dbInstance = pgp(connection); // database instance;
@@ -21,7 +21,12 @@ const dbInstance = pgp(connection); // database instance;
 // PRODUCTION MODE
 const connectionString = process.env.DATABASE_URL;
 
-const dbInstance = pgp({connectionString: connectionString, ssl: { rejectUnauthorized: false}}); // database instance;
+const dbInstance = pgp({
+    connectionString: connectionString,
+    ssl: { rejectUnauthorized: false}
+}); // database instance;
 // END PRODUCTION MODE
+
+//TO-DO: Create environment variable for developer mode
 
 module.exports = dbInstance;
